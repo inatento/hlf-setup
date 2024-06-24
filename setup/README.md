@@ -1,92 +1,49 @@
 =========================================================
-# Option #1
-# Installation instruction for VirtualBox Express Install
-# ONLY FOR VirtualBoxUsers
-=========================================================
-1. Open Vagrantfile & ensure that the box is set appropriately
-    config.vm.box = "acloudfan/hlfdev2.0-0"
-
-    COMMENT out the following line 
-    config.vm.box = "bento/ubuntu-18.04"
-
-2. Execute on host machine
-    > vagrant up
-
-3. Initialize the VM by executing the script & you are done !!!
-    Log into the VM & change directory to vagrant/setup
-
-    > vagrant ssh
-    > cd   /vagrant/setup
-    > ./init-vexpress.sh
-
-4. Validate the setup
-    Log out of the VM and 
-    > exit
-
-    Log back in
-    > vagrant ssh
-    > cd /vagrant/setup
-    > ./validate-prereqs.sh
-
-
-================================================
-# Option #2
-# Installation instruction for Standard Install
-================================================
-1. Open Vagrantfile & ensure that the box is set appropriately
-    config.vm.box = "bento/ubuntu-18.04"
-
-    COMMENT out the following line 
-    config.vm.box = "acloudfan/hlfdev2.0-0"
-
-2. Execute on host machine
-    > vagrant up
-
-Install the Tools & Fabric
-PS: Use these instructons for NATIVE install on Mac/Ubuntu
-    - Execute on terminal prommpt
+# Instalacion de las dependencias necesarias para
+# desplegar una red de fabric y descargar el entorno de firefly
 ==========================================================
-Log into the VM
-> vagrant ssh
-> cd /vagrant/setup
+Entrar a la carpeta "setup" para desde ahí ejecutar los comandos necesarios:
+> cd /setup
 > chmod 755 *.sh
 
 1. Install Docker
 sudo  ./docker.sh
 exit
 
-* Log back in to the VM & validate docker 
+* Log back y log in para validad la instalación de docker
 
 docker info
 
 2. Install GoLang
 sudo  ./go.sh
-exit 
 
 * Log back in to the VM & check GoLang version
 
+exit
 go version
+
+** En caso de no ver go instalado al hacer log out/in, aplciar manualmente los siguientes comandos:
+export GOROOT=/usr/local/go
+export GOPATH=$PWD/../gopath
+export PATH=$GOROOT/bin:$GOPATH/bin:$PATH
+
+echo 'export GOROOT=/usr/local/go' >> ~/.bashrc
+echo 'export GOPATH=$HOME/go' >> ~/.bashrc
+echo 'export PATH=$PATH:$GOROOT/bin:$GOPATH/bin' >> ~/.bashrc
+
+echo 'export GOROOT=/usr/local/go' >> ~/.profile
+echo 'export GOPATH=$HOME/go' >> ~/.profile
+echo 'export PATH=$PATH:$GOROOT/bin:$GOPATH/bin' >> ~/.profile
+
+source ~/.profile
+source ~/.bashrc
+
 
 3. Setup Fabric
 sudo -E   ./fabric-setup.sh
 exit
 
-* Log out & Log back in to the VM & check GoLang version
-vagrant ssh
-
-orderer version
-peer version
-
-4. Setup Fabric CA
-cd /vagrant/setup
-sudo -E  ./caserver-setup.sh
-
-* Log back in to the VM & check GoLang version
-
-fabric-ca-client version
-fabric-ca-server version
-
-5. Install the JQ tool
+4. Install the JQ tool
 sudo ./jq.sh
 
 6. Validate the setup

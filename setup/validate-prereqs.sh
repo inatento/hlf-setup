@@ -19,3 +19,6 @@ orderer version
 echo "============== Fabric CA ======="
 fabric-ca-client version
 fabric-ca-server version
+
+echo "============== JQ ======="
+jq
