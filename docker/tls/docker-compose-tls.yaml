@@ -1,7 +1,7 @@
 # Compose file for launching the test setup with
 # a Peer for Acme and a Peer for Budget
 
-version: '2'
+version: '2.4'
 
 networks:
   airline:

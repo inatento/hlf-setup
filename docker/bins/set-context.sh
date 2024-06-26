@@ -63,7 +63,7 @@ export CC_LANGUAGE="golang"
 
 # Version 2.x
 export INTERNAL_DEV_VERSION="1.0"
-export CC2_PACKAGE_FOLDER="$HOME/packages"
+export CC2_PACKAGE_FOLDER="$HOME/hlf-setup/packages"
 export CC2_SEQUENCE=1
 export CC2_INIT_REQUIRED="--init-required"
 

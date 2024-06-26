@@ -137,6 +137,9 @@ configtxgen -outputCreateChannelTx  airlinechannel.tx -channelID airlinechannel 
 
 cd ..
 
+sudo chown -R $USER:$USER config/
+sudo chmod -R 755 config/
+
 =====================================
 Part-2  Setup the acme & budget peers
 =====================================

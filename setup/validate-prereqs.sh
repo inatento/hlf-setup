@@ -9,8 +9,8 @@ docker-compose  version
 echo "============== Validate version =========="
 go version
 
-echo "============== GOPATH =========="
-echo $GOPATH
+# echo "============== GOPATH =========="
+# echo $GOPATH
 
 echo "============== Fabric =========="
 peer version

@@ -6,6 +6,8 @@ Entrar a la carpeta "setup" para desde ahí ejecutar los comandos necesarios:
 > cd /setup
 > chmod 755 *.sh
 
+sudo ./update_etc_hosts.sh
+
 1. Install Docker
 sudo  ./docker.sh
 exit
@@ -23,19 +25,21 @@ exit
 go version
 
 ** En caso de no ver go instalado al hacer log out/in, aplciar manualmente los siguientes comandos:
-export GOROOT=/usr/local/go
-export GOPATH=$PWD/../gopath
-export PATH=$GOROOT/bin:$GOPATH/bin:$PATH
+sudo apt remove golang-go
+sudo apt purge golang-go
+sudo rm -rf /usr/local/go
 
-echo 'export GOROOT=/usr/local/go' >> ~/.bashrc
-echo 'export GOPATH=$HOME/go' >> ~/.bashrc
-echo 'export PATH=$PATH:$GOROOT/bin:$GOPATH/bin' >> ~/.bashrc
+# Paso 2: Descargar e instalar Go 1.21
+wget https://golang.org/dl/go1.21.0.linux-amd64.tar.gz
+sudo tar -C /usr/local -xzf go1.21.0.linux-amd64.tar.gz
 
-echo 'export GOROOT=/usr/local/go' >> ~/.profile
-echo 'export GOPATH=$HOME/go' >> ~/.profile
-echo 'export PATH=$PATH:$GOROOT/bin:$GOPATH/bin' >> ~/.profile
-
+# Paso 3: Configurar PATH
+echo "export PATH=\$PATH:/usr/local/go/bin" >> ~/.profile
 source ~/.profile
+
+
+
+echo "export PATH=\$PATH:/usr/local/go/bin" >> ~/.bashrc 
 source ~/.bashrc
 
 
