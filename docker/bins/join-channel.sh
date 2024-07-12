@@ -8,5 +8,5 @@ if [ "$CORE_PEER_TLS_ENABLED" == "true" ]; then
    TLS_PARAMETERS=" --tls true --cafile $ORDERER_CA_ROOTFILE"
 fi
 
-peer channel join   -b ./config/airlinechannel.block -o $ORDERER_ADDRESS $TLS_PARAMETERS
+peer channel join   -b ./config/cooperativachannel.block -o $ORDERER_ADDRESS $TLS_PARAMETERS
 

@@ -1,15 +1,15 @@
 # Compose file for launching the test setup with
-# a Peer for Acme and a Peer for Budget
+# a Peer for Merkaba and a Peer for Socio1
 
 version: '2.4'
 
 networks:
-  airline:
+  cooperativa:
 
 services:
 
   # Orderer service
-  orderer.acme.com:
+  orderer.merkaba.com:
     environment:
       # Add the environment properties to ENABLE TLS
       - ORDERER_GENERAL_TLS_ENABLED=true
@@ -17,16 +17,16 @@ services:
       - ORDERER_GENERAL_TLS_CERTIFICATE=/var/hyperledger/tls/server.crt
       - ORDERER_GENERAL_TLS_ROOTCAS=[/var/hyperledger/tls/ca.crt]
 
-  # Enable the TLS for Acme peer1
-  peer1.acme.com:
+  # Enable the TLS for Merkaba peer1
+  peer1.merkaba.com:
     environment:
       - CORE_PEER_TLS_ENABLED=true
       - CORE_PEER_TLS_CERT_FILE=/var/hyperledger/tls/server.crt
       - CORE_PEER_TLS_KEY_FILE=/var/hyperledger/tls/server.key
       - CORE_PEER_TLS_ROOTCERT_FILE=/var/hyperledger/tls/ca.crt
 
-  # Enable the TLS for Budget peer1
-  peer1.budget.com:
+  # Enable the TLS for Socio1 peer1
+  peer1.socio1.com:
     environment:
       - CORE_PEER_TLS_ENABLED=true
       - CORE_PEER_TLS_CERT_FILE=/var/hyperledger/tls/server.crt

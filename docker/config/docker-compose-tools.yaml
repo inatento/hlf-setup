@@ -1,0 +1,41 @@
+# Compose file for launching the test setup with
+# a Peer for merkaba and a Peer for socio1
+
+version: '2.4'
+
+networks:
+  cooperativa:
+
+services:
+
+  # Tools container used for managing peers
+  tools:
+    container_name: tools
+    command: /bin/bash
+
+    # Tools container image
+    image: hyperledger/fabric-tools:$IMAGE_TAG
+
+    tty: true
+    stdin_open: true
+    environment:
+      - GOPATH=/opt/gopath
+      - FABRIC_CFG_PATH=/var/hyperledger/config
+      - FABRIC_LOGGING_SPEC=WARNING
+    # This is the working directory on login
+    working_dir: /opt/scripts
+    volumes:
+      # Mapping for the sample chaincode folders
+      - ${PWD}/../artefacts/nodechaincode:/opt/nodechaincode
+      - ${PWD}/../gopath:/opt/gopath
+      # Folder with channel create tx file
+      - ${PWD}/config:/var/hyperledger/config
+      # Map the folder to root of all Fabric CA Client crypto
+      - ${PWD}/config/crypto-config/peerOrganizations:/var/hyperledger/crypto
+      - /var/run/:/host/var/run/
+      # Map the bins folder
+      - ${PWD}/tool-bins:/opt/scripts
+    networks:
+      - cooperativa
+  
+  

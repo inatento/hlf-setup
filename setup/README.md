@@ -22,13 +22,17 @@ sudo  ./go.sh
 * Log back in to the VM & check GoLang version -->
 
 
-# Instalación de Go
+** En caso de no ver go instalado al hacer log out/in, aplciar manualmente los siguientes comandos:
 sudo apt update && sudo apt upgrade -y
 sudo apt remove golang-go
 sudo apt purge golang-go
 sudo rm -rf /usr/local/go
+
+# Paso 2: Descargar e instalar Go 1.21
 wget https://golang.org/dl/go1.21.0.linux-amd64.tar.gz
 sudo tar -C /usr/local -xzf go1.21.0.linux-amd64.tar.gz
+
+# Paso 3: Configurar PATH
 echo "export PATH=$PATH:/usr/local/go/bin" >> ~/.profile
 source ~/.profile
 echo "export PATH=$PATH:/usr/local/go/bin" >> ~/.bashrc 
@@ -47,7 +51,7 @@ sudo ./jq.sh
 6. Validate the setup
     ./validate-prereqs.sh
 
-<!-- ===============================================================
+===============================================================
 # Issues?
 # Run the following script and share it with Raj in course Q&A
 ===============================================================
@@ -56,4 +60,4 @@ Log into the VM
 > cd /vagrant/setup
 > ./validate-all.sh  > report.txt
 
-Copy & paste the content of report.txt to Q&A post or email. -->
+Copy & paste the content of report.txt to Q&A post or email.

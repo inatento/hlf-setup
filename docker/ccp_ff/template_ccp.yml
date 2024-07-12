@@ -1,0 +1,68 @@
+certificateAuthorities:
+  ca.${ORG}.com:
+    tlsCACerts:
+      pem:
+        - |
+          ${TLS_PEM}
+    url: https://${CAURL}:${CAPORT}
+    grpcOptions:
+      ssl-target-name-override: ${ORG}.com
+    registrar:
+      enrollId: admin
+      enrollSecret: adminpw
+channels:
+  ${CHANNEL}:
+    orderers:
+      - orderer.${ORG}.com
+    peers:
+      peer1.${ORG}.com:
+        chaincodeQuery: true
+        endorsingPeer: true
+        eventSource: true
+        ledgerQuery: true
+client:
+  BCCSP:
+    security:
+      default:
+        provider: SW
+      enabled: true
+      hashAlgorithm: SHA2
+      level: 256
+      softVerify: true
+  credentialStore:
+    cryptoStore:
+      path: ${CRYPTO_PATH}msp
+    path: ${CRYPTO_PATH}msp
+  cryptoconfig:
+    path: ${CRYPTO_PATH}msp
+  logging:
+    level: info
+  organization: ${ORG}.com
+  tlsCerts:
+    client:
+      pem: |
+          ${ADMIN_PEM}
+      key:
+        pem: |
+          ${PEERPEM}
+orderers:
+  orderer.${ORG}.com:
+    tlsCACerts:
+      pem: |
+          ${ORDPEM}
+    url: grpcs://${ORDURL}:${ORDPORT}
+organizations:
+  ${CORG}:
+    certificateAuthorities:
+    - ca.${ORG}.com
+    cryptoPath: /tmp/msp
+    mspid: ${CORG}MSP
+    peers:
+    - peer1.${ORG}.com
+peers:
+  peer1.${ORG}.com:
+    tlsCACerts:
+      pem: |
+          ${PEER_TLS_PEM}
+    url: grpcs://${ORGURL}:${P1PORT}
+version: 1.1.0%

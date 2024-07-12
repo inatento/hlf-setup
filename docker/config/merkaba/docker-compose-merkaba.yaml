@@ -1,0 +1,49 @@
+# Compose file for launching the test setup with
+# a Peer for merkaba and a Peer for socio1
+
+version: '2.4'
+
+networks:
+  cooperativa:
+
+# Storage outside the containers
+volumes:
+  data-peer1.merkaba.com:
+
+services:
+
+  # merkaba peer1
+  peer1.merkaba.com:
+    container_name: peer1.merkaba.com
+    image: hyperledger/fabric-peer:$IMAGE_TAG
+    # Override variables in this section
+    environment:
+      - FABRIC_CFG_PATH=/var/hyperledger/config
+      - FABRIC_LOGGING_SPEC=WARNING
+      - CORE_VM_DOCKER_HOSTCONFIG_NETWORKMODE=${COMPOSE_PROJECT_NAME}_cooperativa
+      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer1.merkaba.com:7051
+      # Add the environment properties to ENABLE TLS
+      - CORE_PEER_TLS_ENABLED=true
+      - CORE_PEER_TLS_CERT_FILE=/var/hyperledger/tls/server.crt
+      - CORE_PEER_TLS_KEY_FILE=/var/hyperledger/tls/server.key
+      - CORE_PEER_TLS_ROOTCERT_FILE=/var/hyperledger/tls/ca.crt
+    # Start the peer node
+    command: peer node start
+    # Host folder mappings
+    volumes:
+      # Folder with channel create tx file
+      - $./:/var/hyperledger/config
+      # Map the folder with MSP for Peer
+      - ../crypto-config/peerOrganizations/merkaba.com/peers/peer1.merkaba.com/msp:/var/hyperledger/msp
+      # Added to support the TLS setup
+      - ../crypto-config/peerOrganizations/merkaba.com/peers/peer1.merkaba.com/tls:/var/hyperledger/tls
+      - /var/run/:/var/run/
+      - data-peer1.merkaba.com:/var/hyperledger/production
+    depends_on: 
+      - orderer.merkaba.com
+    # Map the ports on Host VM to container ports
+    ports:
+      - 7051:7051
+      - 7052:7052
+    networks:
+      - cooperativa 

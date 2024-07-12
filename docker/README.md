@@ -65,9 +65,9 @@ cryptogen generate --config=/var/hyperledger/config/crypto-config.yaml
 
 export FABRIC_CFG_PATH=$PWD
 
-configtxgen -outputBlock  ./orderer/airlinegenesis.block -channelID ordererchannel  -profile AirlineOrdererGenesis
+configtxgen -outputBlock  ./orderer/merkaba-genesis.block -channelID ordererchannel  -profile MerkabaOrdererGenesis
 
-configtxgen -outputCreateChannelTx  airlinechannel.tx -channelID airlinechannel  -profile AirlineChannel
+configtxgen -outputCreateChannelTx  cooperativachannel.tx -channelID cooperativachannel  -profile MerkabaChannel
 
 # 4 Exit out of the tools container
 exit
@@ -131,9 +131,9 @@ cryptogen generate --config=crypto-config.yaml
 # 2  Generate the network artefacts
 export FABRIC_CFG_PATH=$PWD
 
-configtxgen -outputBlock  ./orderer/airlinegenesis.block -channelID ordererchannel  -profile AirlineOrdererGenesis
+configtxgen -outputBlock  ./orderer/merkaba-genesis.block -channelID ordererchannel  -profile MerkabaOrdererGenesis
 
-configtxgen -outputCreateChannelTx  airlinechannel.tx -channelID airlinechannel  -profile AirlineChannel
+configtxgen -outputCreateChannelTx  cooperativachannel.tx -channelID cooperativachannel  -profile MerkabaChannel
 
 cd ..
 

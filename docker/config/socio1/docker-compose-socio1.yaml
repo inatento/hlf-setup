@@ -1,0 +1,52 @@
+# Compose file for launching the test setup with
+# a Peer for socio1
+
+version: '2.4'
+
+networks:
+  cooperativa:
+
+# Storage outside the containers
+volumes:
+  data-peer1.socio1.com:
+
+services:
+
+  # socio1 peer1
+  peer1.socio1.com:
+    container_name: peer1.socio1.com
+    image: hyperledger/fabric-peer:$IMAGE_TAG
+    # landing directory
+    working_dir: $HOME
+    # command: peer node start --peer-chaincodedev=true
+    command: peer node start
+    # Environment setup for peer
+    environment:
+      - FABRIC_CFG_PATH=/var/hyperledger/config
+      - FABRIC_LOGGING_SPEC=WARNING
+      - GOPATH=/opt/gopath
+      - CORE_VM_DOCKER_HOSTCONFIG_NETWORKMODE=${COMPOSE_PROJECT_NAME}_cooperativa
+      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer1.socio1.com:7051
+      # Add the environment properties to ENABLE TLS
+      - CORE_PEER_TLS_ENABLED=true
+      - CORE_PEER_TLS_CERT_FILE=/var/hyperledger/tls/server.crt
+      - CORE_PEER_TLS_KEY_FILE=/var/hyperledger/tls/server.key
+      - CORE_PEER_TLS_ROOTCERT_FILE=/var/hyperledger/tls/ca.crt
+    # host file system mappings
+    volumes:
+      # Folder with channel create tx file
+      - ./:/var/hyperledger/config
+      # Map the folder with MSP for Peer
+      - ../crypto-config/peerOrganizations/socio1.com/peers/peer1.socio1.com/msp:/var/hyperledger/msp
+      # Added to support the TLS setup
+      - ../crypto-config/peerOrganizations/socio1.com/peers/peer1.socio1.com/tls:/var/hyperledger/tls
+      - /var/run/:/var/run/
+      - data-peer1.socio1.com:/var/hyperledger/production
+    depends_on: 
+      - orderer.merkaba.com
+    # Map the ports on Host VM to container ports
+    ports:
+      - 8051:7051
+      - 8052:7052
+    networks:
+      - cooperativa

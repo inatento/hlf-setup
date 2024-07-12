@@ -8,8 +8,8 @@ General:
     # Used to be "GenesisMethod: file" in Fabric 1.x
     BootstrapMethod: file
 
-    # Used to be "GenesisFile: ./acme-genesis.block" in Fabric 1.x
-    BootstrapFile: /var/hyperledger/config/airlinegenesis.block
+    # Used to be "GenesisFile: ./merkaba-genesis.block" in Fabric 1.x
+    BootstrapFile: /var/hyperledger/config/merkaba-genesis.block
 
     # BCCSP Setup
     BCCSP:

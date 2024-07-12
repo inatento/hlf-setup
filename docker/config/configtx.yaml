@@ -16,7 +16,7 @@ Organizations:
   - &Orderer
     Name: Orderer
     ID: OrdererMSP
-    MSPDir: ./crypto-config/ordererOrganizations/acme.com/msp
+    MSPDir: ./crypto-config/ordererOrganizations/merkaba.com/msp
     # Policies are mandatory starting 2.x
     Policies: &OrdererPolicies
       Readers:
@@ -33,53 +33,53 @@ Organizations:
           Type: Signature
           Rule: "OR('OrdererMSP.member')"
 
-  - &Acme
-    Name: Acme
-    ID: AcmeMSP
-    MSPDir: ./crypto-config/peerOrganizations/acme.com/msp
-    Policies: &AcmePolicies
+  - &Merkaba
+    Name: Merkaba
+    ID: MerkabaMSP
+    MSPDir: ./crypto-config/peerOrganizations/merkaba.com/msp
+    Policies: &MerkabaPolicies
       Readers:
           Type: Signature
           # Any member can READ e.g., query
-          Rule: "OR('AcmeMSP.member')"
+          Rule: "OR('MerkabaMSP.member')"
       Writers:
           Type: Signature
           # Any member can WRITE e.g., submit transaction
-          Rule: "OR('AcmeMSP.member')"
+          Rule: "OR('MerkabaMSP.member')"
       Admins:
           Type: Signature
-          # Either Acme admin OR Orderer Admin can carry out admin activities
-          Rule: "OR('AcmeMSP.admin')"
+          # Either Merkaba admin OR Orderer Admin can carry out admin activities
+          Rule: "OR('MerkabaMSP.admin')"
       Endorsement:
           Type: Signature
           # Any member can act as an endorser
-          Rule: "OR('AcmeMSP.member')"
+          Rule: "OR('MerkabaMSP.member')"
     AnchorPeers:
-      - Host: peer1.acme.com
+      - Host: peer1.merkaba.com
         Port: 7051
 
-  - &Budget
-    Name: Budget
-    ID: BudgetMSP
-    MSPDir: ./crypto-config/peerOrganizations/budget.com/msp
-    Policies: &BudgetPolicies
+  - &Socio1
+    Name: Socio1
+    ID: Socio1MSP
+    MSPDir: ./crypto-config/peerOrganizations/socio1.com/msp
+    Policies: &Socio1Policies
       Readers:
           Type: Signature
           # Any member
-          Rule: "OR('BudgetMSP.member')"
+          Rule: "OR('Socio1MSP.member')"
       Writers:
           Type: Signature
           # Any member
-          Rule: "OR('BudgetMSP.member')"
+          Rule: "OR('Socio1MSP.member')"
       Admins:
           Type: Signature
-          # BOTH Budget Admin AND Orderer Admin needed for admin activities
-          Rule: "OR('BudgetMSP.member')"
+          # BOTH Socio1 Admin AND Orderer Admin needed for admin activities
+          Rule: "OR('Socio1MSP.member')"
       Endorsement:
           Type: Signature
-          Rule: "OR('BudgetMSP.member')"
+          Rule: "OR('Socio1MSP.member')"
     AnchorPeers:
-      - Host: peer1.budget.com
+      - Host: peer1.socio1.com
         Port: 7051
 
   
@@ -91,7 +91,7 @@ Orderer: &OrdererDefaults
 
   Addresses:
     # UPDATE THE IP ADDRESS
-    - orderer.acme.com:7050
+    - orderer.merkaba.com:7050
   # Policies for Orderer
   Policies:
     Readers:
@@ -248,7 +248,7 @@ Channel: &ChannelDefaults
 #   PROFILES
 Profiles:
 
-  AirlineOrdererGenesis:
+  MerkabaOrdererGenesis:
       <<: *ChannelDefaults
       Orderer:
           <<: *OrdererDefaults
@@ -257,15 +257,15 @@ Profiles:
       Consortiums:
         AirlineConsortium:
             Organizations:
-                  - <<: *Acme
-                  - <<: *Budget
+                  - <<: *Merkaba
+                  - <<: *Socio1
 
       Application:
             <<: *ApplicationDefaults
 
             Organizations:
-                - <<: *Acme
-                - <<: *Budget
+                - <<: *Merkaba
+                - <<: *Socio1
 
                  
 
@@ -280,8 +280,8 @@ Profiles:
         <<: *ApplicationDefaults
         
         Organizations:
-            - <<: *Acme
-            - <<: *Budget
+            - <<: *Merkaba
+            - <<: *Socio1
 
         
 

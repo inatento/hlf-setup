@@ -1,47 +1,47 @@
 # Defines four organizations
 #  - Orderer organization
-#  - Acme
-#  - Budget
+#  - merkaba
+#  - socio1
 #  - Expo
-##### Orderer for acme
+##### Orderer for merkaba
 OrdererOrgs:
   - Name: Orderer
-    Domain: acme.com
+    Domain: merkaba.com
     EnableNodeOUs: true
     Specs:
       - Hostname: orderer
       
-#### Peers for acme
+#### Peers for merkaba
 PeerOrgs:
-  # Peer configuration for ACME
-  - Name: Acme
-    Domain: acme.com
+  # Peer configuration for merkaba
+  - Name: Merkaba
+    Domain: merkaba.com
     EnableNodeOUs: true
     Specs:
-      - Hostname: peer1.acme.com
-        CommonName: peer1.acme.com
+      - Hostname: peer1.merkaba.com
+        CommonName: peer1.merkaba.com
     Users:
       Count: 1
 
-  # Peer configuration for Budget
-  - Name: Budget
-    Domain: budget.com
+  # Peer configuration for socio1
+  - Name: Socio1
+    Domain: socio1.com
     EnableNodeOUs: true
     Specs:
-      - Hostname: peer1.budget.com
-        CommonName: peer1.budget.com
+      - Hostname: peer1.socio1.com
+        CommonName: peer1.socio1.com
     Users:
       Count: 1
 
-  # Peer configuration for Budget
-  - Name: Expo
-    Domain: expo.com
-    EnableNodeOUs: true
-    Specs:
-      - Hostname: peer1.expo.com
-        CommonName: peer1.expo.com
-    Users:
-      Count: 1
+  # # Peer configuration for socio1
+  # - Name: Expo
+  #   Domain: expo.com
+  #   EnableNodeOUs: true
+  #   Specs:
+  #     - Hostname: peer1.expo.com
+  #       CommonName: peer1.expo.com
+  #   Users:
+  #     Count: 1
 
 
       

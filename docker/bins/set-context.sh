@@ -28,21 +28,30 @@ export FABRIC_CFG_PATH=$PWD/config/$1
 # Address of the peer
 export CORE_PEER_ADDRESS=peer1.$1.com:7051
 
-if [ "$ORG_CONTEXT" == "budget" ]; then
+if [ "$ORG_CONTEXT" == "visa" ]; then
     # Native binary uses the local port on VM 
     export CORE_PEER_ADDRESS=peer1.$1.com:8051
 fi
 
+if [ "$ORG_CONTEXT" == "bbva" ]; then
+    # Native binary uses the local port on VM 
+    export CORE_PEER_ADDRESS=peer1.$1.com:9051
+fi
+
+if [ "$ORG_CONTEXT" == "santander" ]; then
+    # Native binary uses the local port on VM 
+    export CORE_PEER_ADDRESS=peer1.$1.com:6051
+fi
 # Local MSP for the admin - Commands need to be executed as org admin
 export CORE_PEER_MSPCONFIGPATH=$PWD/config/crypto-config/peerOrganizations/$1.com/users/Admin@$1.com/msp
 
 # Address of the orderer
-export ORDERER_ADDRESS=orderer.acme.com:7050
+export ORDERER_ADDRESS=orderer.merkaba.com:7050
 
 # RAFT requires TLS
 if [ "$2" == "tls" ] || [ "$2" == "raft" ] ; then
 
-    export ORDERER_CA_ROOTFILE=$PWD/config/crypto-config/ordererOrganizations/acme.com/orderers/orderer.acme.com/msp/tlscacerts/tlsca.acme.com-cert.pem
+    export ORDERER_CA_ROOTFILE=$PWD/config/crypto-config/ordererOrganizations/merkaba.com/orderers/orderer.merkaba.com/msp/tlscacerts/tlsca.merkaba.com-cert.pem
 
     export CORE_PEER_TLS_ROOTCERT_FILE=$PWD/config/crypto-config/peerOrganizations/$1.com/peers/peer1.$1.com/tls/ca.crt
 
@@ -58,7 +67,7 @@ export CC_CONSTRUCTOR='{"Args":["init","a","100","b","200"]}'
 export CC_NAME="gocc1"
 export CC_PATH="chaincode_example02"
 export CC_VERSION="1.0"
-export CC_CHANNEL_ID="airlinechannel"
+export CC_CHANNEL_ID="cooperativachannel"
 export CC_LANGUAGE="golang"
 
 # Version 2.x

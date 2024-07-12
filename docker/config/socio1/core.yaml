@@ -12,7 +12,7 @@
 peer:
 
     # The Peer id is used for identifying this Peer instance.
-    id: peer1.budget.com
+    id: peer1.socio1.com
 
     # The networkId allows for logical seperation of networks
     networkId: dev
@@ -281,7 +281,7 @@ peer:
     # to match the name of one of the MSPs in each of the channel
     # that this peer is a member of. Otherwise this peer's messages
     # will not be identified as valid by other nodes.
-    localMspId: BudgetMSP
+    localMspId: Socio1MSP
 
     # CLI common client config options
     client:

@@ -13,8 +13,8 @@
 ==============
 # Manual Steps
 ==============
-peer channel create -c airlinechannel -f ./config/airlinechannel.tx -o $ORDERER_ADDRESS --tls true --cafile $ORDERER_CA_ROOTFILE
+peer channel create -c cooperativachannel -f ./config/cooperativachannel.tx -o $ORDERER_ADDRESS --tls true --cafile $ORDERER_CA_ROOTFILE
 
---outputBlock config/airlinechannel.block
+--outputBlock config/cooperativachannel.block
 
-peer channel join   -b ./airlinechannel.block -o $ORDERER_ADDRESS 
+peer channel join   -b ./cooperativachannel.block -o $ORDERER_ADDRESS 
